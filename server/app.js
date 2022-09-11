@@ -28,9 +28,21 @@ app.use(express.json());
 
 app.use((req, res, next) => {
 	console.log("Body:", req.body);
-	res.send("got it ");
+
 	next();
 });
 
+app.get("/artists", (req, res) => {
+	const artists = getAllArtists();
+	// res.statusCode(200);
+	res.status(200).json(getAllArtists());
+});
+
+app.post("/artists", (req, res) => {
+	const data = req.body;
+	addArtist(data);
+	res.status(201).json(data);
+});
+// GET /artists getAllArtists()
 const port = 5000;
 app.listen(port, () => console.log("Server is listening on port", port));

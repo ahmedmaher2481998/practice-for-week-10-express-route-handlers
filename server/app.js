@@ -43,6 +43,13 @@ app.post("/artists", (req, res) => {
 	addArtist(data);
 	res.status(201).json(data);
 });
-// GET /artists getAllArtists()
+
+app.get("/artists/latest", (req, res) => {
+	res.status(200).json(getLatestArtist());
+});
+
+app.get("/artists/latest/albums", (req, res) => {
+	res.status(200).json(getAlbumsForLatestArtist());
+});
 const port = 5000;
 app.listen(port, () => console.log("Server is listening on port", port));
